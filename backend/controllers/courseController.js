@@ -2,6 +2,12 @@ const Course = require('../models/courseModel')
 const mongoose = require('mongoose')
 
 // get all courses
+const getAllCourses = async (req, res) => {
+  const courses = await Course.find({})
+
+  res.status(200).json(courses)
+}
+
 const getCourses = async (req, res) => {
   const user_id = req.user._id
 
@@ -30,7 +36,7 @@ const getCourse = async (req, res) => {
 
 // create new course
 const createCourse = async (req, res) => {
-  const {title, cost: cost, days: days} = req.body
+  const {title, cost: cost, days: days, link1: link1} = req.body
 
   let emptyFields = []
 
@@ -43,6 +49,9 @@ const createCourse = async (req, res) => {
   if(!days) {
     emptyFields.push('days')
   }
+  if(!link1){
+    emptyFields.push('link1')
+  }
   if(emptyFields.length > 0) {
     return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
   }
@@ -50,7 +59,7 @@ const createCourse = async (req, res) => {
   // add doc to db
   try {
     const user_id = req.user._id
-    const course = await Course.create({title, cost: cost, days: days, user_id})
+    const course = await Course.create({title, cost: cost, days: days, link1: link1 ,user_id})
     res.status(200).json(course)
   } catch (error) {
     res.status(400).json({error: error.message})
@@ -99,5 +108,6 @@ module.exports = {
   getCourse,
   createCourse,
   deleteCourse,
-  updateCourse
+  updateCourse,
+  getAllCourses
 }

@@ -9,6 +9,7 @@ const CourseForm = () => {
   const [title, setTitle] = useState('')
   const [cost, setCost] = useState('')
   const [days, setDays] = useState('')
+  const [link1, setLink] = useState('')
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
 
@@ -20,7 +21,7 @@ const CourseForm = () => {
       return
     }
 
-    const course = {title, cost: cost, days: days}
+    const course = {title, cost: cost, days: days, link1: link1}
 
     const response = await fetch('/api/courses', {
       method: 'POST',
@@ -40,6 +41,7 @@ const CourseForm = () => {
       setTitle('')
       setCost('')
       setDays('')
+      setLink('')
       setError(null)
       setEmptyFields([])
       dispatch({type: 'CREATE_COURSE', payload: json})
@@ -73,7 +75,13 @@ const CourseForm = () => {
         value={days}
         className={emptyFields.includes('days') ? 'error' : ''}
       />
-
+      <label>Link:</label>
+      <input
+        type="text"
+        onChange={(e) => setLink(e.target.value)}
+        value={link1}
+        className={emptyFields.includes('link1') ? 'error' : ''}
+      />
       <button>Add Course</button>
       {error && <div className="error">{error}</div>}
     </form>
