@@ -10,12 +10,9 @@ In order to achieve this, we are developing a web-based platform using the follo
 - Node.js: A JavaScript runtime environment.
 # Working
 - Create all express routes we need for the API.
-- Create a MongoDB Atlas database and connect
-- to our web application using a package called
-mongoose.
+- Create a MongoDB Atlas database and connect to our web application using a package called mongoose.
 - Create a mongoose model for both courses and the users. User model hashes and validates email and password. Course model contains structure of the tutor data.
-- Define the functions for the routes called
-controllers.
+- Define the functions for the routes called controllers.
 - Create react application and set up all pages.
 - Create react contexts to provide global states to full react application.
 - Using JSON web tokens, create a secure login/signup functionality.
